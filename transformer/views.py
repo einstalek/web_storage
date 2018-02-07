@@ -8,6 +8,7 @@ from django.conf import settings
 from django.http import Http404
 from django.http import HttpResponse
 import os
+from .rgb_transformer import convert_to_bnw
 
 def some_script(_file_path):
 	_another_file_path = _file_path
@@ -32,17 +33,22 @@ def run_on_file(request, pk):
 	documents = Document.objects.all()
 	document = Document.objects.get(pk=pk)
 	
-	_another_file_path = some_script(document.document.url)
+	#_another_file_path = some_script(document.document.url)
+	file_name = document.document.url.split("/")[-1]
+	storage = settings.MEDIA_ROOT + "/uploads/"
+	_another_file_path = convert_to_bnw(storage + file_name, storage)
 	
 	document.processed = True
-	document.result_url = path + _another_file_path
+	document.result_url = storage + _another_file_path
+	print(document.result_url)
 	document.save()
 	return render(request, 'transformer/files_list.html', {'documents':documents, 'path': path})
 	
 def download_file(request, pk):
-    root = "/".join(settings.MEDIA_ROOT.split("/")[:-1])
-    file_path = root + Document.objects.get(pk=pk).document.url
-    print(file_path)
+    document = Document.objects.get(pk=pk)
+    storage = settings.MEDIA_ROOT + "/uploads/"
+    file_name = "__" + document.document.url.split("/")[-1]
+    file_path = storage + file_name
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
