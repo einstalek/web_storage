@@ -25,7 +25,7 @@ SECRET_KEY = '$j*_))3)*j8jd!t$j$qrb9n0o!)(*d#2oropfft32+pb)8-q-$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'einstalek.pythonanywhere.com']
 
 
 # Application definition
