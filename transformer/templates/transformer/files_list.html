@@ -1,0 +1,18 @@
+{% extends 'transformer/base.html' %}
+
+{% block content %}
+    <table class="table">
+		{% for document in documents %}
+		<tr>
+			{% if document.processed %}
+			<th><a href="{% url 'download_file' pk=document.pk%}"> {{ document.document }} </a></th>
+			{% endif %}
+			{% if not document.processed %}
+			<th> {{ document.document }} </th>
+			{% endif %}
+			<th>{{ document.uploaded_at }}</th>
+			<th><a href="{% url 'run_on_file' pk=document.pk%}"><button> Run </button></a></th>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
