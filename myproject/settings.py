@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$j*_))3)*j8jd!t$j$qrb9n0o!)(*d#2oropfft32+pb)8-q-$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'einstalek.pythonanywhere.com']
 
@@ -120,5 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/DATA/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'DATA')
